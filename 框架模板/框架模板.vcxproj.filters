@@ -18,12 +18,27 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SystemClass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="inputclass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="graphicsclass.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Systemclass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="inputclass.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="graphicsclass.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
