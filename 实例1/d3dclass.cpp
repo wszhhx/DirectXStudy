@@ -25,9 +25,9 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	float screenDepth, float screenNear)
 {
 	HRESULT result;
-	IDXGIFactory* factory = (IDXGIFactory*)malloc(sizeof(IDXGIFactory));
-	IDXGIAdapter* adapter = (IDXGIAdapter*)malloc(sizeof(IDXGIAdapter));
-	IDXGIOutput* adapterOutput = (IDXGIOutput*)malloc(sizeof(adapterOutput));
+	IDXGIFactory* factory;
+	IDXGIAdapter* adapter;
+	IDXGIOutput* adapterOutput;
 	unsigned int numModes, i, numerator, denominator, stringLength;
 	DXGI_MODE_DESC* displayModeList;
 	DXGI_ADAPTER_DESC adapterDesc;
@@ -52,6 +52,12 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 
 	//使用Factory为主要的显卡接口创建适配器
 	result = factory->EnumAdapters(0, &adapter);
+	if (FAILED(result)) {
+		return false;
+	}
+
+	//列举监视器的主要输出适应方式
+	result = adapter->EnumOutputs(0, &adapterOutput);
 	if (FAILED(result)) {
 		return false;
 	}
@@ -175,6 +181,11 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	//开始创建D3D设备和交换链
 	result = D3D10CreateDeviceAndSwapChain(NULL, D3D10_DRIVER_TYPE_HARDWARE, NULL, 0, D3D10_SDK_VERSION,
 		&swapChainDesc, &m_swapChain, &m_device);
+	if (FAILED(result)) {
+		return false;
+	}
+	//创建后备缓存
+	result = m_swapChain->GetBuffer(0, __uuidof(ID3D10Texture2D), (LPVOID*)&backBufferPtr);
 	if (FAILED(result)) {
 		return false;
 	}

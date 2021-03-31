@@ -3,7 +3,7 @@
 #ifndef _GRAPHICSCLASS_H_
 #define _GRAPHICSCLASS_H_
 
-#include<windows.h>
+#include"d3dclass.h"
 
 ///
 //全局变量//
@@ -26,6 +26,8 @@ public:
 
 private:
 	bool Render();
+private:
+	D3DClass* m_D3D;
 };
 
 #endif</windows.h> // !1
